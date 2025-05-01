@@ -8,6 +8,10 @@ const {
 } = require("electron");
 const fs = require("fs");
 
+//Custom,, set it to your convinient path
+const customUserDataPath = path.join("D:", "MyAppData");
+app.setPath("userData", customUserDataPath);
+
 let win;
 
 function createWindow() {
@@ -23,7 +27,7 @@ function createWindow() {
 
   win.removeMenu();
   win.loadFile("index.html");
-  //win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   ipcMain.on("load-page", (event, page) => {
     win.loadFile(page);
@@ -32,6 +36,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
+
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
