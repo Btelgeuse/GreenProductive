@@ -35,15 +35,19 @@ function clearTaskDisplay() {
     });
   }
 
-finishBtn.addEventListener("click", () => {
-    console.log("Saving progress:", progressBarValue.value);
-    localStorage.setItem("finalProgress", progressBarValue.value);
-    saveTasksToStorage(); // Save on finish too
-    window.electronAPI.loadPage("finishDay.html");
+  finishBtn.addEventListener("click", () => {
+    const todayKey = getLocalDateKey();
+    localStorage.removeItem(`tasks-${todayKey}`);
+  
     clearTaskDisplay();
-    progressBarValue.value = 0; // Reset progress bar
-    taskList = []; // Clear task list
-});
+    progressBarValue.value = 0;
+    taskList = [];
+  
+    localStorage.setItem("finalProgress", progressBarValue.value);
+  
+    window.electronAPI.loadPage("finishDay.html");
+  });
+  
 
 // Load saved input if available
 const savedInput = localStorage.getItem("currentInput");
@@ -157,7 +161,6 @@ function updateProgressBar() {
 // Save tasks and checked state in localStorage per day
 function saveTasksToStorage() {
     const today = getLocalDateKey();
-    localStorage.setItem(`tasks-${todayKey}`, JSON.stringify(taskData));
 
     const taskData = {
         tasks: taskList,
