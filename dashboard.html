@@ -1,75 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="styles.css">
-    
-    <title>Green Productivity</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <title>Green Productivity</title>
 </head>
 <body>
-    <div class="dashDiv">
-        <div class="top-section">
-            <div class="datetime">
-                <span id="day"></span>
-                <span id="number"></span>
-                <span id="month"></span>
-            </div>
+  <div class="dashDiv">
+    <div class="top-section">
+      <div class="datetime">
+        <span id="day"></span>
+        <span id="number"></span>
+        <span id="month"></span>
+      </div>
 
-            <div class="right-section">
-                <div class="progression">
-                    <h3>Progression</h3>
-                    <progress id="progress-bar" value="0" max="100"></progress>
-                </div>
-
-                <div class="add-task">
-                    <input id="write-task" type="text" size="28" placeholder="Write your task here..." >
-                    <button id="add-btn">+</button>
-                </div>
-            </div>
+      <div class="right-section">
+        <div class="progression">
+          <h3>Progress</h3>
+          <progress id="progress-bar" value="0" max="100"></progress>
         </div>
 
-        <div class="bottom-section">
-            <p id="task1">
-                <i class='bx bxs-leaf'></i>
-                <span id="text-task-1"></span>
-            </p>
-
-            <p id="task2">
-                <i class='bx bxs-leaf'></i>
-                <span id="text-task-2"></span>
-            </p>
-
-            <p id="task3">
-                <i class='bx bxs-leaf'></i>
-                <span id="text-task-3"></span>
-            </p>
-
-            <p id="task4">
-                <i class='bx bxs-leaf'></i>
-                <span id="text-task-4"></span>
-            </p>
-
-            <p id="task5">
-                <i class='bx bxs-leaf'></i>
-                <span id="text-task-5"></span>
-            </p>
-
-            <p id="task6">
-                <i class='bx bxs-leaf'></i>
-                <span id="text-task-6"></span>
-            </p>
-
-            <p id="task7">
-                <i class='bx bxs-leaf'></i>
-                <span id="text-task-7"></span>
-            </p>
+        <div class="add-task">
+          <input id="write-task" type="text" placeholder="Write your task here..." />
+          <button id="add-btn" title="Add Task">+</button>
         </div>
-        <button id="finish-btn">FINISH DAY</button>
+      </div>
+    </div>
+
+    <div class="bottom-section">
+      <p id="task1">
+        <i class='bx bxs-leaf'></i>
+        <span id="text-task-1" class="task-text"></span>
+        <button class="delete-btn" id="delete-1" style="display: none;">🗑️</button>
+      </p>
+      
+      <p id="task2">
+        <i class='bx bxs-leaf'></i>
+        <span id="text-task-2" class="task-text"></span>
+        <button class="delete-btn" id="delete-2" style="display: none;">🗑️</button>
+      </p>
+      <p id="task3">
+        <i class='bx bxs-leaf'></i>
+        <span id="text-task-3" class="task-text"></span>
+        <button class="delete-btn" id="delete-3" style="display: none;">🗑️</button>
+      </p>
+      <p id="task4">
+        <i class='bx bxs-leaf'></i>
+        <span id="text-task-4" class="task-text"></span>
+        <button class="delete-btn" id="delete-4" style="display: none;">🗑️</button>
+      </p>
+      <p id="task5">
+        <i class='bx bxs-leaf'></i>
+        <span id="text-task-5" class="task-text"></span>
+        <button class="delete-btn" id="delete-5" style="display: none;">🗑️</button>
+      </p>
+      <p id="task6">
+        <i class='bx bxs-leaf'></i>
+        <span id="text-task-6" class="task-text"></span>
+        <button class="delete-btn" id="delete-6" style="display: none;">🗑️</button>
+      </p>
+      <p id="task7">
+        <i class='bx bxs-leaf'></i>
+        <span id="text-task-7" class="task-text"></span>
+        <button class="delete-btn" id="delete-7" style="display: none;">🗑️</button>
+      </p>
+    </div>
+
+    <div class="export-section">
+      <input type="date" id="export-date" />
+      <button id="export-btn">Export Tasks</button>
     </div>
     
-    <script src="dashboard.js"></script>
+  
+  <button id="finish-btn">FINISH DAY</button>
+  
+  </div>
+
+  <script src="dashboard.js"></script>
 </body>
 </html>
