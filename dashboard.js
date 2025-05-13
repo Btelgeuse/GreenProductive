@@ -14,8 +14,12 @@ displayWeekDay.innerHTML = weekday[todayName]
 displayDayNb.innerHTML = todayNumber
 displayMonth.innerHTML = month[todayMonth]
 
+//-------------------------------------------------------------------------
+
 const addTaskBtn = document.getElementById("add-btn")
 const inputTask = document.getElementById("write-task")
+const list = document.getElementById("task-list");
+let taskCount = 0;
 let taskList = [];
 const taskSpans = [];
 
@@ -29,44 +33,71 @@ finishBtn.addEventListener("click", () => {
     window.electronAPI.loadPage("finishDay.html");
 })
 
-for (let i = 1; i <= 7; i++) {
-    let taskSpan = document.getElementById("text-task-" + i);
+for (let i = 1; i <= 6; i++) {
+    const p = document.createElement("p");
+    p.id = `task${i}`;
 
-    if (taskSpan) {
-        taskSpans.push(taskSpan);
+    const icon = document.createElement("i");
+    icon.className = "bx bxs-leaf";
 
-        taskSpan.addEventListener("click", (event) => {
-            event.target.classList.toggle("done")
-            event.target.classList.toggle("checked")
-            updateProgressBar()
-        })
-    }
+     const span = document.createElement("span");
+    span.id = `text-task-${i}`;
+    span.textContent = taskList[i - 1];
+
+    span.addEventListener("click", (event) => {
+    event.target.classList.toggle("done")
+    event.target.classList.toggle("checked")
+    updateProgressBar()
+})
+
+  p.appendChild(icon);
+  p.appendChild(span);
+  list.appendChild(p);
 }
 
 addTaskBtn.addEventListener("click", () => {
     if (inputTask.value.trim() === "") {
         console.warn("Please enter a task before adding to the list.");
-    } else if (taskList.length >= 7) {
-        console.warn("Task list is full. You can only add up to 7 tasks.");
-    } else {
+    }else if(taskCount < 6){
+        taskCount++;
         taskList.push(inputTask.value);
-        updateTaskDisplay(); //Update spans with new task list
+        const rellenar = document.getElementById(`text-task-${taskCount}`);
+        rellenar.textContent = taskList[taskCount - 1];
         inputTask.value = ""; //Clear input field
-        totalTasks++
+        updateProgressBar()
+    } 
+    else {
+        taskList.push(inputTask.value);
+        addTask();
+        inputTask.value = ""; //Clear input field
         updateProgressBar()
     }
 });
 
-function updateTaskDisplay() {
-    for (let i = 0; i < taskSpans.length; i++) {
-        if (taskList[i]) {
-            taskSpans[i].textContent = taskList[i];
-        } else {
-            taskSpans[i].textContent = "";
-        }
-    }
-}
+function addTask(){
+    taskCount++;
 
+    const p = document.createElement("p");
+    p.id = `task${taskCount}`;
+
+  const icon = document.createElement("i");
+  icon.className = "bx bxs-leaf";
+
+  const span = document.createElement("span");
+  span.id = `text-task-${taskCount}`;
+  span.textContent = taskList[taskCount - 1];
+
+  span.addEventListener("click", (event) => {
+    event.target.classList.toggle("done")
+    event.target.classList.toggle("checked")
+    updateProgressBar()
+    })
+
+  p.appendChild(icon);
+  p.appendChild(span);
+  list.appendChild(p);
+
+}
 function updateProgressBar() {
     const checkedElements = document.querySelectorAll(".checked");
     const checkedCount = checkedElements.length;
