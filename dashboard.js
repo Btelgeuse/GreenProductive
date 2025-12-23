@@ -26,7 +26,7 @@ const displayWeekDay = document.getElementById("day");
 const displayDayNb = document.getElementById("number");
 const displayMonth = document.getElementById("month");
 const speechBtn = document.getElementById("speech-btn");
-const micIcon = speechBtn.querySelector('i');
+const micIcon = speechBtn.querySelector("i");
 
 const day = new Date();
 let todayName = day.getDay();
@@ -110,7 +110,11 @@ speechBtn.addEventListener("click", () => {
       speechActive = true;
       window.electronAPI.onSpeechFinal((text) => {
         console.log("FINAL TEXT RECEIVED:", text);
-        
+        if (typeof text === "string") {
+          inputTask.value += text;
+        } else {
+          console.log("text is not a string!");
+        }
       });
 
       window.electronAPI.onSpeechPartial((partial) => {
@@ -124,7 +128,6 @@ speechBtn.addEventListener("click", () => {
     // Update UI
     micIcon.classList.remove("bx-microphone-off");
     micIcon.classList.add("bx-microphone");
-
   } else {
     console.log("Stopping speech service...");
     try {
@@ -141,5 +144,5 @@ speechBtn.addEventListener("click", () => {
       console.error("Error stopping speech service:", error);
     }
   }
-  console.log ("speech toggle finished");
+  console.log("speech toggle finished");
 });
